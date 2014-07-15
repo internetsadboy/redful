@@ -1,0 +1,16 @@
+{
+  "HASH": {
+    "HDEL": "http://redis.io/commands/hdel",
+    "HEXISTS": "http://redis.io/commands/hexists",
+    "HGET": "http://redis.io/commands/hget",
+    "HGETALL": "http://redis.io/commands/hgetall",
+    "HINCRBY": "http://redis.io/commands/hincrby",
+    "HINCRBYFLOAT": "http://redis.io/commands/hincrbyfloat",
+    "HLEN": "http://redis.io/commands/hlen",
+    "HMGET": "http://redis.io/commands/hmget",
+    "HMSET": "http://redis.io/commands/hmset",
+    "HSET": "http://redis.io/commands/hset",
+    "HSETNX": "http://redis.io/commands/hsetnx",
+    "HVALS": "http://redis.io/commands/hvals"
+  }
+}
