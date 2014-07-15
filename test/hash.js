@@ -4,14 +4,14 @@ var request = require('supertest')
   , test = require('tape');
 
 
-test('HASH', function(t) {
+test('Hash', function(t) {
 
-  t.test('GET HSET', function(t) {
+  t.test('GET hset', function(t) {
 
     t.plan(1);
 
     function done(err) {
-      t.ok('GET HSET', 'GET HSET');
+      t.ok('GET hset', 'GET hset');
       t.end();
     }
 
@@ -23,12 +23,12 @@ test('HASH', function(t) {
 
   });
 
-  t.test('POST HSET', function(t) {
+  t.test('POST hset', function(t) {
 
     t.plan(1);
 
     function done(err) {
-      t.ok('POST HSET', 'POST HSET');
+      t.ok('POST hset', 'POST hset');
       t.end();
     }
 
@@ -36,7 +36,27 @@ test('HASH', function(t) {
       .post('/hset')
       .send({ name: 'mydb', value: 'myjson' })
       .expect(200)
+      .expect('Content-Type', 'application/json')
       .expect({ name: 'mydb', value: 'myjson' })
+      .end(done);
+
+  });
+
+  t.test('PUT hset', function(t) {
+
+    t.plan(1);
+
+    function done(err) {
+      t.ok('PUT /hset', 'PUT /hset');
+      t.end();
+    }
+
+    request('http://localhost:8000')
+      .put('/hset')
+      .send({ value: 'newjson' })
+      .expect(200)
+      .expect('Content-Type', 'application/json')
+      .expect({})
       .end(done);
 
   });

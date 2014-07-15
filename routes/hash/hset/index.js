@@ -10,6 +10,7 @@ module.exports = function(router) {
     res.send('/hset\n');
   });
 
+
   router.post('/', function(req, res, next) {
     var uid, name, value, entry = {};
 
@@ -23,14 +24,43 @@ module.exports = function(router) {
       entry[key] = value[key];
     });
 
-    db.HSET(name, uid, value, function(err) {
+    db.HSET(name, uid, JSON.stringify(entry), function(err) {
       if(err) {
         console.log(err);
       }
 
-      res.json(value);
+      res.json(entry);
     });
+  });
 
+
+  router.put('/', function(req, res, next) {
+    var uid, name, value, entry = {};
+
+    uid = req.body.uid;
+    name = req.body.name;
+    value = req.body.value;
+
+    db.HGET(name, uid, function(err, data) {
+      if(err) {
+        console.log(err);
+      }
+
+      entry = JSON.parse(data);
+
+      Object.keys(value).forEach(function(key, val) {
+        entry[key] = value[key];
+      });
+
+      db.HSET(name, uid, JSON.stringify(entry), function(err) {
+        if(err) {
+          console.log(err);
+        }
+
+        res.json(entry);
+      });
+
+    });
   });
 
 }
