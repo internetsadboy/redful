@@ -11,11 +11,17 @@ module.exports = function(router) {
   });
 
   router.post('/', function(req, res, next) {
-    var uid, name, value;
+    var uid, name, value, entry = {};
 
     uid = crypto.randomBytes(12).toString('hex');
     name = req.body.name;
     value = req.body.value;
+
+    entry.uid = uid;
+
+    Object.keys(value).forEach(function(key, val) {
+      entry[key] = value[key];
+    });
 
     db.HSET(name, uid, value, function(err) {
       if(err) {
@@ -24,6 +30,7 @@ module.exports = function(router) {
 
       res.json(value);
     });
+
   });
 
 }
