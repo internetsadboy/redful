@@ -53,10 +53,10 @@ test('Hash', function(t) {
 
     request('http://localhost:8000')
       .put('/hset')
-      .send({ value: 'newjson' })
+      .send({"uid":"296b1a6ae1ff4d961195258e","name":"shimdb","value":{"key":"newValue"}})
       .expect(200)
       .expect('Content-Type', 'application/json')
-      .expect({})
+      .expect({"uid":"296b1a6ae1ff4d961195258e","key":"newValue"})
       .end(done);
 
   });
